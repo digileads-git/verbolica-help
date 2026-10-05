@@ -1,0 +1,74 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/*
+ * Verbolica MOSS palette — values from
+ * AIOS projects/verbolica/docs/design system/tokens/colors.css.
+ * Khaki-550 is the interactive brand fill (khaki-500 is identity/tint only).
+ * Neutrals carry the ink's green-grey, never blue.
+ */
+@theme {
+  --color-fd-background: #F3F1EA;
+  --color-fd-foreground: #2C312C;
+  --color-fd-muted: #EAE7DE;
+  --color-fd-muted-foreground: #7E857C;
+  --color-fd-popover: #FBFAF5;
+  --color-fd-popover-foreground: #2C312C;
+  --color-fd-card: #FBFAF5;
+  --color-fd-card-foreground: #2C312C;
+  --color-fd-border: #E3E0D6;
+  --color-fd-primary: #5D6539;
+  --color-fd-primary-foreground: #FBFAF5;
+  --color-fd-secondary: #F0EFE7;
+  --color-fd-secondary-foreground: #2C312C;
+  --color-fd-accent: #EDEEE0;
+  --color-fd-accent-foreground: #4E5533;
+  --color-fd-ring: #868A55;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+}
+
+.dark {
+  --color-fd-background: #1C201C;
+  --color-fd-foreground: #EDF1EA;
+  --color-fd-muted: #161916;
+  --color-fd-muted-foreground: #949B91;
+  --color-fd-popover: #262B26;
+  --color-fd-popover-foreground: #EDF1EA;
+  --color-fd-card: #262B26;
+  --color-fd-card-foreground: #EDF1EA;
+  --color-fd-border: #3A403A;
+  --color-fd-primary: #C6CB99;
+  --color-fd-primary-foreground: #1C201C;
+  --color-fd-secondary: #2F352F;
+  --color-fd-secondary-foreground: #EDF1EA;
+  --color-fd-accent: #3B4127;
+  --color-fd-accent-foreground: #C6CB99;
+  --color-fd-ring: #868A55;
+}
+
+.dark #nd-sidebar {
+  --color-fd-muted: #262B26;
+  --color-fd-secondary: #2F352F;
+  --color-fd-muted-foreground: #C4CABF;
+}
+
+/* Newsreader is the display face: page titles and article headings. */
+h1,
+h2,
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}

@@ -1,0 +1,41 @@
+---
+title: WordPress publishing problems
+description: Fix the most common reasons a WordPress site won't connect or publish.
+icon: Wrench
+---
+
+## The connection fails
+
+- **Check the site address.** Use the exact public address, including `https://` and `www` if the site uses it.
+- **Check the key.** Copy it again from **Settings → Verbolica Connect** in WordPress and paste it into **Brand Settings → Connections**. Watch for spaces at the start or end.
+- **Check the plugin is active.** In WordPress, open **Plugins** and make sure **Verbolica Connect** is activated.
+
+## A firewall is blocking Verbolica
+
+Cloudflare, Wordfence and similar services sometimes block Verbolica as a bot. Verbolica identifies itself with this user agent:
+
+```
+Verbolica/1.0 (+https://app.verbolica.com)
+```
+
+Add a rule that allows requests with this user agent. In Cloudflare, create a WAF custom rule (or a skip rule) for requests where the **User Agent contains** `Verbolica/1.0`, and set it to skip bot protection.
+
+## Verbolica says the plugin needs updating
+
+Some features need a recent version of the plugin. In WordPress, go to **Dashboard → Updates** (or **Plugins**) and update **Verbolica Connect**. If no update appears, download the latest zip from **Brand Settings → Connections** and upload it again: WordPress offers to replace the existing version.
+
+## A published Elementor page is blank
+
+Verbolica publishes designed pages as Elementor containers. If **Flexbox Container** is switched off in Elementor, the page can't render, so the plugin refuses the publish and the error names the setting. Turn it on in **Elementor → Settings → Features**, then publish again.
+
+## Changes don't show on the live page
+
+Caching plugins and hosting caches can keep showing the old version. Clear the site's cache (and Elementor's, under **Elementor → Tools → Regenerate CSS & Data**) and reload.
+
+## Comments are open on new posts
+
+Verbolica publishes posts with comments closed. If they appear open, check whether another plugin is forcing comments on.
+
+## Still stuck?
+
+Open the draft that failed: the error message says what went wrong. Send it to your account manager, or ask the Strategist "why did this fail to publish?".

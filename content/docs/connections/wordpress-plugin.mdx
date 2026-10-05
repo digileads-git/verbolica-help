@@ -1,0 +1,60 @@
+---
+title: Install the WordPress plugin
+description: Connect a WordPress site with the Verbolica Connect plugin so Verbolica can publish and measure engagement.
+icon: Plug
+---
+
+Verbolica publishes to WordPress through a small plugin called **Verbolica Connect**. You don't need to share a WordPress username or password; the plugin gives you a key instead.
+
+**Requirements:** WordPress 5.6 or later, PHP 7.4 or later, and permission to install plugins.
+
+<Steps>
+<Step>
+
+### Download the plugin
+
+In Verbolica, open the brand's **Brand Settings → Connections**. In the **WordPress** card, click the **Verbolica Connect plugin** link to download the zip file.
+
+</Step>
+<Step>
+
+### Install it on your site
+
+In your WordPress admin, go to **Plugins → Add New → Upload Plugin**, choose the zip file, click **Install Now**, then **Activate**.
+
+</Step>
+<Step>
+
+### Copy the connect key
+
+In WordPress, go to **Settings → Verbolica Connect** and copy the key shown there.
+
+</Step>
+<Step>
+
+### Paste it into Verbolica
+
+Back in the **WordPress** card in Verbolica, enter the site's address in **Site URL** (for example `https://www.example.com`), paste the key into **Verbolica Connect key**, and save. The card shows **Connected** when it works.
+
+</Step>
+</Steps>
+
+## What the plugin does
+
+- **Publishing:** creates and updates posts and pages, including categories, tags, featured images, authors and Yoast SEO fields.
+- **Importing:** lets Verbolica read your existing posts and pages, including custom post types, so it knows what is already on the site.
+- **Engagement tracking:** measures scroll depth, active reading time, and clicks on calls to action, outbound links, email and phone links. It uses no cookies and no cross-site tracking.
+- **Form tracking:** records that a form was submitted on a page, for Contact Form 7, Gravity Forms, Fluent Forms, Ninja Forms, WPForms and Elementor forms. It records the form and the page, **never what was typed into the form**.
+- **Elementor support:** designed pages publish as native, editable Elementor content, using the brand's colours and fonts.
+
+## Updates
+
+The plugin updates itself through the normal WordPress plugin updates screen. Keep it up to date: some Verbolica features need a recent version and will tell you if yours is too old.
+
+## Import existing content
+
+Once connected, use **Brand Settings → Connections** to import the site's existing posts and pages. Imported content appears in the **Library**, and Verbolica uses it to link new articles to existing ones and to avoid writing duplicates.
+
+<Callout type="warn" title="Using Cloudflare or a security plugin?">
+  Firewalls sometimes block Verbolica's requests. See [WordPress publishing problems](/docs/troubleshooting/wordpress-publishing-problems) to allow them through.
+</Callout>
