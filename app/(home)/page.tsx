@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import {
   BarChart3,
+  Brush,
   CircleCheck,
+  Code,
   Coins,
   Handshake,
+  Palette,
   MessagesSquare,
   PenLine,
   Plug,
@@ -24,13 +27,19 @@ const topics: Topic[] = [
   },
   {
     title: 'Connections',
-    description: 'The WordPress plugin, Google Search Console and Analytics, and social accounts.',
+    description: 'The WordPress plugin, Google, social accounts and Google Chat.',
     href: '/docs/connections/wordpress-plugin',
     icon: Plug,
   },
   {
+    title: 'Brand and strategy',
+    description: 'Brand identity, the brand guide, and the quarterly strategy.',
+    href: '/docs/brand/brand-identity',
+    icon: Palette,
+  },
+  {
     title: 'Content',
-    description: 'Campaigns, drafts, Decisions, lead magnets, email and the website builder.',
+    description: 'Campaigns, drafts, Decisions, social, email, lead magnets, video and the website builder.',
     href: '/docs/content/campaigns-and-channels',
     icon: PenLine,
   },
@@ -48,7 +57,7 @@ const topics: Topic[] = [
   },
   {
     title: 'Reports and performance',
-    description: 'Monthly reports, rankings, insights and AI visibility.',
+    description: 'Monthly reports, rankings, insights, AI visibility and paid media.',
     href: '/docs/reports/monthly-reports',
     icon: BarChart3,
   },
@@ -59,10 +68,22 @@ const topics: Topic[] = [
     icon: Coins,
   },
   {
+    title: 'For agencies',
+    description: 'Lead generation, Growth Audits, proposals, points and white-label.',
+    href: '/docs/agency/lead-generation',
+    icon: Brush,
+  },
+  {
     title: 'For clients',
     description: 'Reviewing work, approving it, and following results.',
     href: '/docs/for-clients/client-guide',
     icon: Handshake,
+  },
+  {
+    title: 'Developers',
+    description: 'The REST API, webhooks and the MCP server for AI agents.',
+    href: '/docs/developers/api',
+    icon: Code,
   },
   {
     title: 'Troubleshooting',

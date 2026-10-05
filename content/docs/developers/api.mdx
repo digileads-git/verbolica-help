@@ -1,0 +1,120 @@
+---
+title: REST API
+description: Read content, record decisions and post finished social content from your own systems.
+icon: Code
+---
+
+The Verbolica API lets other systems, such as a project management tool or a client's own platform, read a brand's content and act on it.
+
+**Base URL:** `https://app.verbolica.com/api/v1`. If your workspace uses its own domain, the same paths work there.
+
+## Authentication
+
+Workspace owners create API keys in **Settings → Integrations**. A key starts with `dk_` and is shown once, so copy it when you create it. You can choose which team member a key acts as, and revoke it at any time.
+
+Send the key as a bearer token:
+
+```bash
+curl https://app.verbolica.com/api/v1/brands/BRAND_ID/content \
+  -H "Authorization: Bearer dk_your_key"
+```
+
+A key can only reach brands in its own workspace. Requests for anything else return `404`.
+
+## Rate limits
+
+Each workspace may make **60 requests a minute**. Over the limit, you get `429` with these headers:
+
+| Header | Meaning |
+|---|---|
+| `Retry-After` | Seconds to wait before trying again. |
+| `X-RateLimit-Limit` | Requests allowed per minute. |
+| `X-RateLimit-Remaining` | Requests left in this window. |
+| `X-RateLimit-Reset` | When the window resets. |
+
+## Endpoints
+
+### List a brand's content
+
+`GET /brands/{id}/content`
+
+| Query parameter | Description |
+|---|---|
+| `status` | Only items with this status. |
+| `type` | Only items of this type: `blog`, `page`, `social`, `video_script` or `lead_magnet`. |
+| `limit` | Up to 100. Default 50. |
+| `offset` | For paging. Default 0. |
+
+Returns `brand`, `content` (a list), `total`, `limit` and `offset`. Each item includes its `id`, `title`, `content_type`, `status`, `excerpt`, `target_keyword`, `preview_url`, `scheduled_for`, `published_at`, `published_url`, `social_post_url` and `external_ref_id`.
+
+### Get one item
+
+`GET /content/{id}`
+
+Returns the full item, including its `slug`, `campaign_name`, `brand`, any `declined_feedback` and `external_feedback`, and its WordPress post id once published.
+
+### Approve or decline
+
+`PATCH /content/{id}/status`
+
+```json
+{ "status": "approved", "feedback": "Looks good" }
+```
+
+`status` is `approved` or `declined`. `feedback` is optional, up to 5,000 characters. Approving schedules the item for publishing.
+
+### Add feedback
+
+`POST /content/{id}/feedback`
+
+```json
+{ "feedback": "Client wants the pricing section moved up" }
+```
+
+Feedback is added to the item's history, with a timestamp, without changing its status. Up to 5,000 characters.
+
+### Link to your own system
+
+`PATCH /content/{id}`
+
+```json
+{ "external_ref_id": "TASK-1234" }
+```
+
+Stores your system's id on the item, so you can match them up. Send `null` to clear it.
+
+### Post finished social content
+
+`POST /brands/{id}/social-posts`
+
+For posts that are already written and approved in another system.
+
+```json
+{
+  "platform": "instagram",
+  "caption": "Our spring range is here.",
+  "image_urls": ["https://example.com/post-1.png"],
+  "link": "https://example.com/spring",
+  "scheduled_at": "2026-11-02T09:00:00+02:00",
+  "external_ref": "6f1c2b7e-0a9d-4c1e-9f3a-2b8d7e5a1c40"
+}
+```
+
+| Field | Description |
+|---|---|
+| `platform` | `instagram` or `facebook`. |
+| `caption` | The post text. Up to 2,200 characters on Instagram, 8,000 on Facebook. |
+| `image_urls` | One to ten image URLs. More than one makes a carousel. Images up to 10 MB each. |
+| `link` | Optional. |
+| `scheduled_at` | When to publish, as an ISO 8601 date and time with a time zone. |
+| `external_ref` | A UUID from your system. Sending the same one again returns the existing post instead of creating a duplicate, so retries are safe. |
+
+Returns `201` with the new post's `id`, or `200` for a repeated `external_ref`. Returns `422` if the brand has no connected account for that platform or an image can't be fetched, and `502` if the platform refuses the post; resend with the same `external_ref` to retry.
+
+The post publishes at `scheduled_at` through the brand's [connected social accounts](/docs/connections/social-accounts). It doesn't go through AI, approval or credits.
+
+## Errors
+
+Errors return JSON with an `error` message: `400` for an invalid request, `401` for a missing or invalid key, `404` when the item isn't found or isn't in your workspace, `429` for rate limits.
+
+See also [Webhooks](/docs/developers/webhooks) to be told when things change, and the [MCP server](/docs/developers/mcp-server) for AI agents.

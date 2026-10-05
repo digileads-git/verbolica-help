@@ -1,0 +1,36 @@
+---
+title: MCP server
+description: Connect AI agents and assistants to Verbolica through the Model Context Protocol.
+icon: Cable
+---
+
+Verbolica runs an **MCP server**, so AI assistants and agents that support the Model Context Protocol can use Verbolica's marketing tools: reading a brand's performance, planning content, writing drafts and more.
+
+## Connect
+
+| Setting | Value |
+|---|---|
+| **URL** | `https://app.verbolica.com/api/mcp` |
+| **Transport** | HTTP, JSON-RPC 2.0 |
+| **Authentication** | `Authorization: Bearer dk_your_key` |
+
+Use an API key created in **Settings → Integrations**, as for the [REST API](/docs/developers/api). The agent acts as the team member the key is assigned to, and only within your workspace. The same limit of 60 requests a minute applies.
+
+## Find your brands
+
+Every tool works on one brand and needs its `brand_id`. List the brands your key can reach with:
+
+```bash
+curl https://app.verbolica.com/api/mcp/brands \
+  -H "Authorization: Bearer dk_your_key"
+```
+
+## Tools
+
+Call `tools/list` to see every available tool with its description and inputs. They cover the same ground as the Strategist in the app, including reading performance and rankings, planning campaigns, writing and editing drafts, submitting work for approval, and working with website pages.
+
+Work done through the MCP server spends the brand's credits, exactly as it would in the app.
+
+<Callout type="warn" title="Treat a key like a password">
+  An API key can do real work and spend credits on every brand in your workspace. Keep it out of shared code and chat logs, and revoke it in **Settings → Integrations** if it leaks.
+</Callout>

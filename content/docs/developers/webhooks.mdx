@@ -1,0 +1,57 @@
+---
+title: Webhooks
+description: Get a notification in your own system whenever content is generated, approved, published or declined.
+icon: Webhook
+---
+
+Webhooks send an HTTP `POST` to a URL you choose whenever something happens in Verbolica. Use them to move a task along in your project management tool when a draft is approved, for example.
+
+## Add an endpoint
+
+Workspace owners add endpoints in **Settings → Integrations**:
+
+1. Enter the **URL** to send to and an optional **Label**.
+2. Choose the **Events** to receive.
+3. Optionally set a **Signing Secret**, so you can check requests really came from Verbolica.
+
+The page shows recent deliveries for each endpoint, with the response your server sent. Pause an endpoint to stop deliveries without deleting it.
+
+## Events
+
+| Event | Sent when |
+|---|---|
+| `content.generated` | A draft is written. |
+| `content.status_changed` | A draft's status changes. |
+| `content.scheduled` | A draft is approved and scheduled. |
+| `content.published` | A draft is published. |
+| `content.declined` | A draft is declined. |
+| `bde_campaign.created` | A Decisions campaign is created. |
+| `social_campaign.created` | A social campaign is created. |
+
+## The request
+
+Each delivery is a JSON body with an `event` field, details of what changed and a `timestamp`. These headers are sent:
+
+| Header | Value |
+|---|---|
+| `Content-Type` | `application/json` |
+| `X-Webhook-Event` | The event name, for example `content.published`. |
+| `X-Webhook-Signature` | Present when the endpoint has a signing secret. |
+
+Respond with any `2xx` status within 10 seconds.
+
+## Check the signature
+
+The signature is an HMAC-SHA256 of the raw request body, using your signing secret, as a hex string. Compute it yourself and compare:
+
+```js
+import { createHmac, timingSafeEqual } from 'node:crypto';
+
+function isFromVerbolica(rawBody, signature, secret) {
+  const expected = createHmac('sha256', secret).update(rawBody).digest('hex');
+  return signature?.length === expected.length &&
+    timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+}
+```
+
+Use the raw body exactly as received. Parsing and re-serialising the JSON changes it, and the signature won't match.
