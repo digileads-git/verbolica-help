@@ -49,6 +49,23 @@
   --color-fd-ring: #868A55;
 }
 
+/* Callout and status hues from the MOSS ramps (the defaults include a banned blue). */
+:root {
+  --color-fd-info: #3E6349;
+  --color-fd-success: #3E6349;
+  --color-fd-warning: #D69A44;
+  --color-fd-error: #A63E2E;
+  --color-fd-idea: #868A55;
+}
+
+.dark {
+  --color-fd-info: #8FB49C;
+  --color-fd-success: #8FB49C;
+  --color-fd-warning: #E7BF74;
+  --color-fd-error: #E59B8D;
+  --color-fd-idea: #C6CB99;
+}
+
 .dark #nd-sidebar {
   --color-fd-muted: #262B26;
   --color-fd-secondary: #2F352F;

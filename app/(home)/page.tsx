@@ -30,7 +30,7 @@ const topics: Topic[] = [
   },
   {
     title: 'Content',
-    description: 'Campaigns, drafts, editing, comments and email.',
+    description: 'Campaigns, drafts, Decisions, lead magnets, email and the website builder.',
     href: '/docs/content/campaigns-and-channels',
     icon: PenLine,
   },
@@ -41,8 +41,8 @@ const topics: Topic[] = [
     icon: CircleCheck,
   },
   {
-    title: 'The Strategist',
-    description: 'Ask in plain English, weekly recommendations, and automation.',
+    title: 'The Strategist and AI agent',
+    description: 'Ask in plain English, an AI agent clients can email, recommendations and automation.',
     href: '/docs/strategist/chat',
     icon: MessagesSquare,
   },
