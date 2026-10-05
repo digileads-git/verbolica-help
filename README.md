@@ -1,6 +1,6 @@
 # Verbolica Help
 
-The public knowledge base for Verbolica, served at **help.verbolica.com**.
+The public knowledge base for Verbolica, the AI marketing platform, served at **help.verbolica.com**.
 
 Static docs site: Next.js + [Fumadocs](https://fumadocs.dev), Markdown/MDX articles in git, built-in
 search (Orama, no external service). No database, no server-side state. Hosted on Vercel.
@@ -33,6 +33,7 @@ Node 22+. TypeScript is pinned to 6.x because `typescript-eslint` does not suppo
 - Plain English, short sentences, second person. No em dashes. British/international spelling.
 - Describe what the user sees and does, never internals (table names, cron jobs, models).
 - Never publish internal pricing (points, per-action costs, rate cards): clients read this site.
+- Verbolica is an **AI marketing platform**, never "a content platform" or "content automation".
 - When a feature changes in the app, update its article in the same piece of work.
 
 ## Design

@@ -11,7 +11,7 @@ const code = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variabl
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: appName, template: `%s | ${appName}` },
-  description: 'Guides and answers for Verbolica: setup, content, publishing, reporting and the WordPress plugin.',
+  description: 'Guides and answers for Verbolica, the AI marketing platform: setup, strategy, content, publishing, reporting and the WordPress plugin.',
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {
