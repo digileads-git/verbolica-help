@@ -36,6 +36,14 @@ Node 22+. TypeScript is pinned to 6.x because `typescript-eslint` does not suppo
 - Verbolica is an **AI marketing platform**, never "a content platform" or "content automation".
 - When a feature changes in the app, update its article in the same piece of work.
 
+## Screenshots
+
+`public/screenshots/*.webp`, 1600px wide, light theme. Captured from the **fictional demo
+workspace** (Quillmere Studio; brands use `.example` domains) on app.verbolica.com, never a real
+client workspace. Each is cropped to the content area with the chat bar hidden, and checked by eye
+before it ships: no real names or addresses, no pricing or per-action credit costs. Embed with
+`![Alt text describing the screen](/screenshots/name.webp)` after the paragraph or list it shows.
+
 ## Design
 
 MOSS identity, from the AIOS design system (`projects/verbolica/docs/design system/`): paper `#F3F1EA`,
